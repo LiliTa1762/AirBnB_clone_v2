@@ -26,7 +26,6 @@ sudo chown -Rh ubuntu:ubuntu /data/
 
 LOCATION_ALIAS="\n\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}"
 ARG_SED="/listen 80 default_server;/a \\$LOCATION_ALIAS\n\n"
-echo $ARG_SED
 sudo sed -i "${ARG_SED}" /etc/nginx/sites-available/default
 
 sudo service nginx restart
