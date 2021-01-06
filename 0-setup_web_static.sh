@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# sets up my web servers for the deployment of web_static
+# Prepare the web servers for deploy
 
 sudo apt-get -y update
 sudo apt -y install nginx
@@ -7,25 +7,17 @@ sudo apt -y install nginx
 sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test/
 
-printf '<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-</head>
-<body>
-    Testing Nginx configuration
-</body>
-</html>
-' | sudo tee /data/web_static/releases/test/index.html
+sudo touch /data/web_static/releases/test/index.html
+sudo echo "To test NGINX CONFIG" | sudo tee /data/web_static/releases/test/index.html
 
+# ln create symbolic links
+# s override, f remove existence file
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-sudo chown -Rh ubuntu:ubuntu /data/
+# -h if the directory contains symbolic links
+# -R To recursively operate on all files and directories
+sudo chown -hR ubuntu:ubuntu /data/
 
-LOCATION_ALIAS="\n\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}"
-ARG_SED="/listen 80 default_server;/a \\$LOCATION_ALIAS\n\n"
-sudo sed -i "${ARG_SED}" /etc/nginx/sites-available/default
+sudo sed -i '/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}' /etc/nginx/sites-available/default
 
 sudo service nginx restart
