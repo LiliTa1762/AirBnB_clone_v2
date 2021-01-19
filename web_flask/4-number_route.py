@@ -36,7 +36,7 @@ def python_cool(text):
 @app.route("/number/<n>", strict_slashes=False)
 def is_number(n):
     """To display if n is number"""
-    if n.isdigit():
+    if type(n) is int:
         return ("{} is a number".format(n))
 
 
