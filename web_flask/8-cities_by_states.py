@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+"""Start Flask web app using templates"""
+
 from flask import Flask
 from flask import render_template
 from models import storage
