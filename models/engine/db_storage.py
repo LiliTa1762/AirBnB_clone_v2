@@ -10,6 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
 import os
+from sqlalchemy.orm import scoped_session
 """ from models.amenity import Amenity """
 """ from models.place import Place """
 """ from models.review import Review """
@@ -91,3 +92,7 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(Session)
+
+    def close(self):
+        """ To close session """
+        self.__session.close()
