@@ -5,6 +5,7 @@ from flask import Flask
 from flask import render_template
 from models import storage
 from models.state import State
+from models.city import City
 
 
 app = Flask(__name__)
@@ -20,7 +21,8 @@ def session_down(error):
 def cities_by_states():
     """To display list of cities by states"""
     s = storage.all(State).values()
-    return render_template('8-cities_by_states.html', s=s)
+    c = storage.all(City).values()
+    return render_template('8-cities_by_states.html', s=s, c=c)
 
 
 if __name__ == '__main__':
