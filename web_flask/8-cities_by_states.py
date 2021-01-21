@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Start Flask web app using templates"""
+"""Start Flask web app using templates to list"""
 
 from flask import Flask
 from flask import render_template
@@ -22,7 +22,7 @@ def cities_by_states():
     """To display list of cities by states"""
     s = storage.all(State).values()
     c = storage.all(City).values()
-    return render_template('8-cities_by_states.html', s=s, c=c)
+    return render_template("8-cities_by_states.html", s=s, c=c)
 
 
 if __name__ == '__main__':
