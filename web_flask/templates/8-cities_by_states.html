@@ -11,7 +11,7 @@
                 <UL>
                     {% for city in c | sort(attribute='name') %}
                         {% if city.state_id == state.id %}
-                        <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
+                            <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
                         {% endif %}
                     {% endfor %}
                 </UL>
